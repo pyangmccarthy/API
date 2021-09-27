@@ -1,0 +1,17 @@
+version: "3.2"
+services:
+  api:
+    build: .
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+    environment: 
+      - DJANGO_SETTINGS_MODULE=api.settings
+      - SECRET_KEY='secret'
+      - ALLOWED_HOSTS="*"
+      - DEBUG=True
+      - GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS=$GOOGLE_DRIVE_STORAGE_JSON_KEY_FILE_CONTENTS
+    stdin_open: true
+    tty: true
+    command: python3 manage.py runserver 0.0.0.0:8000
